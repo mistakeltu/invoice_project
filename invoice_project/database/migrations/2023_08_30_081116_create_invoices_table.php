@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('invoice_number')->unique();
             $table->string('invoice_date');
-            $table->string('invoice_amount');
+            $table->integer('invoice_amount');
             $table->string('client_name');
             $table->string('client_address');
             $table->string('client_address2')->nullable();
