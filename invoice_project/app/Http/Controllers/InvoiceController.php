@@ -13,6 +13,10 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::all(); //pasiemam visus invoicus is DB
+        return view('invoices.index', [
+            'invoices' => $invoices,
+            'countries' => Invoice::$countryList,
+        ]);
     }
 
     /**

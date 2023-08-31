@@ -44,10 +44,10 @@
                                         {{$invoice->invoice_date}}
                                     </div>
                                     <div class="col-md-3">
-                                        {{$invoice->client->client_name}}
+                                        {{$invoice->client_name}}
                                     </div>
                                     <div class="col-md-2">
-                                        {{$countries[$invoice->client->client_country]}}
+                                        {{$invoice->client_country}}
                                     </div>
                                     <div class="col-md-1">
                                         <b>{{$invoice->invoice_amount}} eur</b>
