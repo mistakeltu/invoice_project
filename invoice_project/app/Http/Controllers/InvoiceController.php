@@ -12,7 +12,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::all(); //pasiemam visus invoicus is DB
     }
 
     /**
