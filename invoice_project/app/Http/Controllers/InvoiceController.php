@@ -61,7 +61,10 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        //
+        return view('invoices.edit', [
+            'invoice' => $invoice,
+            'countries' => Invoice::$countryList,
+        ]);
     }
 
     /**
@@ -69,7 +72,28 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        $invoice->invoice_number = $request->number;
+        $invoice->invoice_date = $request->date;
+        $invoice->client_name = $request->name;
+        $invoice->client_address = $request->address;
+        $invoice->client_address2 = $request->address2;
+        $invoice->client_vat = $request->vat;
+        $invoice->client_country = $request->country;
+        $invoice->invoice_amount = $request->amount;
+        $invoice->save();
+
+        return redirect()->route('invoices-index');
+    }
+
+    /**
+     * Delete confirmation
+     */
+
+    public function delete(Invoice $invoice)
+    {
+        return view('invoices.delete', [
+            'invoice' => $invoice,
+        ]);
     }
 
     /**
@@ -77,6 +101,8 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
+        $invoice->delete(); //delete obj from DB
+
+        return redirect()->route('invoice-index');
     }
 }
