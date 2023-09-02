@@ -44,10 +44,24 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('invoices-index') }}">
-                                    List
+                                    List of invoices
                                 </a>
                                 <a class="dropdown-item" href="{{ route('invoices-create') }}">
-                                    New
+                                    New Invoice
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Clients
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('clients-index') }}">
+                                    List of clients
+                                </a>
+                                <a class="dropdown-item" href="{{ route('clients-create') }}">
+                                    New Client
                                 </a>
                             </div>
                         </li>
