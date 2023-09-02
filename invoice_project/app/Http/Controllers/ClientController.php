@@ -57,7 +57,10 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view('clients.show', [
+            'client' => $client,
+            'countries' => Client::$countryList,
+        ]);
     }
 
     /**
@@ -99,6 +102,7 @@ class ClientController extends Controller
     {
         return view('clients.delete', [
             'client' => $client,
+            'invoicesCount' => $client->invoices()->count(),
         ]);
     }
 

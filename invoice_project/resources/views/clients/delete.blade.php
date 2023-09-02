@@ -1,4 +1,4 @@
-{{-- DELETE Client CONFIRMATION --}}
+{{-- DELETE CLIENT CONFIRMATION --}}
 @extends('layouts.app')
 
 @section('content')
@@ -9,13 +9,14 @@
                 <div class="card-header">
                     <h1>Confirm Delete Client</h1>
                 </div>
+                @if(!$invoicesCount)
                 <div class="card-body">
                     <form action={{route('clients-destroy', $client)}} method="post">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
                                     <div class="m-3">
-                                        <h4>Number</h4>
+                                        <h4>Client</h4>
                                         <p>{{$client->client_name}}</p>
                                     </div>
                                     <div class="m-3">
@@ -29,6 +30,27 @@
                         @method('DELETE')
                     </form>
                 </div>
+                @else
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-4">
+                                <div class="m-3">
+                                    <h4>Client</h4>
+                                    <p>{{$client->client_name}}</p>
+                                </div>
+                                <div class="m-3">
+                                    <h4>Client has invoices</h4>
+                                    <p>Client cannot be deleted</p>
+                                </div>
+                                <div class="m-3">
+                                    <a href="{{route('clients-index')}}" class="btn btn-outline-secondary m-1">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

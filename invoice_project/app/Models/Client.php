@@ -275,4 +275,9 @@ class Client extends Model
         'ZW' => 'Zimbabwe',
         'AX' => 'Åland Islands',
     ];
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

@@ -54,6 +54,7 @@
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-outline-primary">Edit Client</button>
+                                        <a href="{{route('clients-index')}}" type="submit" class="btn btn-outline-secondary">Clients list</a>
                                     </div>
                                 </div>
                             </div>

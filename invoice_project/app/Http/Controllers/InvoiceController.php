@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -25,7 +26,7 @@ class InvoiceController extends Controller
     public function create()
     {
         return view('invoices.create', [
-            'countries' => Invoice::$countryList,
+            'clients' => Client::all(),
         ]);
     }
 
@@ -35,15 +36,14 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $invoice = new Invoice();
+
+        // fill the object with data from the request
         $invoice->invoice_number = $request->number;
         $invoice->invoice_date = $request->date;
-        $invoice->client_name = $request->name;
-        $invoice->client_address = $request->address;
-        $invoice->client_address2 = $request->address2;
-        $invoice->client_vat = $request->vat;
-        $invoice->client_country = $request->country;
+        $invoice->client_id = $request->client_id;
         $invoice->invoice_amount = $request->amount;
-        $invoice->save();
+
+        $invoice->save(); // save the object to the database
 
         return redirect()
             ->route('invoices-index')
@@ -68,7 +68,7 @@ class InvoiceController extends Controller
     {
         return view('invoices.edit', [
             'invoice' => $invoice,
-            'countries' => Invoice::$countryList,
+            'clients' => Client::all(),
         ]);
     }
 
@@ -77,14 +77,12 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
+        // fill the object with data from the request
         $invoice->invoice_number = $request->number;
         $invoice->invoice_date = $request->date;
-        $invoice->client_name = $request->name;
-        $invoice->client_address = $request->address;
-        $invoice->client_address2 = $request->address2;
-        $invoice->client_vat = $request->vat;
-        $invoice->client_country = $request->country;
+        $invoice->client_id = $request->client_id;
         $invoice->invoice_amount = $request->amount;
+
         $invoice->save();
 
         return redirect()

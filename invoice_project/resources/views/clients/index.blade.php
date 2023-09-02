@@ -14,11 +14,14 @@
 
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <h4>Client</h4>
                                 </div>
                                 <div class="col-md-2">
                                     <h4>Country</h4>
+                                </div>
+                                <div class="col-md-1">
+                                    <h4>Invoices</h4>
                                 </div>
                                 <div class="col-md-5">
                                 </div>
@@ -28,11 +31,14 @@
                         @forelse ($clients as $client)
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     {{$client->client_name}}
                                 </div>
                                 <div class="col-md-2">
                                     {{$countries[$client->client_country] ?? $client->client_country}}
+                                </div>
+                                <div class="col-md-1">
+                                    {{$client->invoices()->count()}}
                                 </div>
                                 <div class="col-md-4">
                                     <div class="buttons-bin">
