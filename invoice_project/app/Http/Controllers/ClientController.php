@@ -65,7 +65,10 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('clients.edit', [
+            'client' => $client,
+            'countries' => Client::$countryList,
+        ]);
     }
 
     /**
@@ -73,7 +76,19 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        // fill the object with data from the request
+        $client->client_name = $request->name;
+        $client->client_address = $request->address;
+        $client->client_address2 = $request->address2;
+        $client->client_vat = $request->vat;
+        $client->client_country = $request->country;
+
+        $client->save(); // save the object to the database
+
+        return redirect()
+            ->route('clients-index')
+            ->with('msg', ['type' => 'success', 'content' => 'Client was updated successfully.']);
+        // redirect to the index page with a success message
     }
 
     /**
@@ -92,6 +107,13 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete(); //delete obj from DB
+
+        return redirect()
+            ->route('clients-index')
+            ->with('msg', [
+                'type' => 'info',
+                'content' => 'Client was deleted successfully'
+            ]);
     }
 }

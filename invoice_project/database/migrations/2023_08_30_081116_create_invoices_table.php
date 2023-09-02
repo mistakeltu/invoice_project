@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('invoice_number')->unique();
             $table->string('invoice_date');
+
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+
             $table->integer('invoice_amount');
-            $table->string('client_name');
-            $table->string('client_address');
-            $table->string('client_address2')->nullable();
-            $table->string('client_vat')->nullable();
-            $table->string('client_country');
+
             $table->timestamps();
         });
     }

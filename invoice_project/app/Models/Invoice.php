@@ -275,4 +275,14 @@ class Invoice extends Model
         'ZW' => 'Zimbabwe',
         'AX' => 'Åland Islands',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function belekas()
+    {
+        return $this->belongsTo(Client::class, 'client_id', 'id');
+    }
 }
