@@ -47,9 +47,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-12">
+                                <div class="col-md-12">
                                     <button type="button" class="--add-product btn btn-outline-secondary" data-url="{{route('invoices-show-line')}}">Add product</button>
-                                </div> --}}
+                                </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Amount</label>

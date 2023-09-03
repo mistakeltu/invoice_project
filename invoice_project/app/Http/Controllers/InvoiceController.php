@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -117,5 +118,14 @@ class InvoiceController extends Controller
                 'type' => 'info',
                 'content' => 'Invoice was deleted successfully'
             ]);
+    }
+
+    public function showLine()
+    {
+        $html = view('invoices.line')
+            ->with(['products' => Product::all()])
+            ->render();
+
+        return response()->json(['html' => $html]);
     }
 }
