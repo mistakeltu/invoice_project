@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\Client;
 use App\Models\Product;
+use App\Models\ProductInvoice;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -14,7 +15,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all(); //pasiemam visus invoicus is DB
+        $invoices = Invoice::all(); // get all invoices from the database
+        // $invoices are collection of Invoice model objects
+
         return view('invoices.index', [
             'invoices' => $invoices,
             'countries' => Invoice::$countryList,
@@ -31,9 +34,13 @@ class InvoiceController extends Controller
         //     $prices[] = ['id' => $key, 'price' => $item];
         // })->toArray();
 
-        return view('invoices.create', [
-            'clients' => Client::all(),
-        ]);
+
+        return view(
+            'invoices.create',
+            [
+                'clients' => Client::all(),
+            ]
+        );
     }
 
     /**
@@ -41,22 +48,27 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice = new Invoice();
 
-        // fill the object with data from the request
-        $invoice->invoice_number = $request->number;
-        $invoice->invoice_date = $request->date;
-        $invoice->client_id = $request->client_id;
-        $invoice->invoice_amount = $request->amount;
+        $invoice = Invoice::create([
+            'invoice_number' => $request->number,
+            'invoice_date' => $request->date,
+            'client_id' => $request->client_id,
+        ]);
 
-        $invoice->save(); // save the object to the database
+
+        foreach ($request->product_id as $key => $value) {
+            $quantity = $request->quantity[$key];
+            ProductInvoice::create([
+                'product_id' => $value,
+                'invoice_id' => $invoice->id,
+                'quantity' => $quantity,
+            ]);
+        }
 
         return redirect()
             ->route('invoices-index')
-            ->with('msg', [
-                'type' => 'success',
-                'content' => 'Invoice was created successfully'
-            ]);
+            ->with('msg', ['type' => 'success', 'content' => 'Invoice was created successfully.']);
+        // redirect to the index page with a success message
     }
 
     /**
@@ -89,20 +101,17 @@ class InvoiceController extends Controller
         $invoice->client_id = $request->client_id;
         $invoice->invoice_amount = $request->amount;
 
-        $invoice->save();
+        $invoice->save(); // save the object to the database
 
         return redirect()
             ->route('invoices-index')
-            ->with('msg', [
-                'type' => 'success',
-                'content' => 'Invoice was updated successfully'
-            ]);
+            ->with('msg', ['type' => 'success', 'content' => 'Invoice was updated successfully.']);
+        // redirect to the index page with a success message
     }
 
     /**
-     * Delete confirmation
+     * Show delete confirmation page.
      */
-
     public function delete(Invoice $invoice)
     {
         return view('invoices.delete', [
@@ -115,14 +124,12 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        $invoice->delete(); //delete obj from DB
+        $invoice->delete(); // delete the object from the database
 
         return redirect()
             ->route('invoices-index')
-            ->with('msg', [
-                'type' => 'info',
-                'content' => 'Invoice was deleted successfully'
-            ]);
+            ->with('msg', ['type' => 'info', 'content' => 'Invoice was deleted successfully.']);
+        // redirect to the index page with a info message
     }
 
     public function showLine()

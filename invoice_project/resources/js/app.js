@@ -44,7 +44,7 @@ const addProductEvent = (_) => {
                 e.target.closest(".--line").querySelector(".--total").value = (
                     price * quantity
                 ).toFixed(2);
-                calculateTotal();
+                // calculateTotal();
             });
         });
 
