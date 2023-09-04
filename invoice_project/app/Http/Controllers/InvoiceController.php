@@ -26,6 +26,11 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+        // $prices = [];
+        // Product::all()->pluck('price', 'id')->each(function ($item, $key) use (&$prices) {
+        //     $prices[] = ['id' => $key, 'price' => $item];
+        // })->toArray();
+
         return view('invoices.create', [
             'clients' => Client::all(),
         ]);
