@@ -14,6 +14,7 @@ addEventListener("load", (_) => {
                         document
                             .querySelector(".--products")
                             .insertAdjacentHTML("beforeend", res.data.html);
+                        addProductEvent();
                     })
                     .catch((err) => console.log(err));
             });

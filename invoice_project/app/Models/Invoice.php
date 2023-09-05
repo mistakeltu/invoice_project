@@ -276,6 +276,10 @@ class Invoice extends Model
         'AX' => 'Åland Islands',
     ];
 
+    protected $fillable = [
+        'invoice_number', 'invoice_date', 'client_id'
+    ];
+
     public function client()
     {
         return $this->belongsTo(Client::class);
@@ -284,5 +288,10 @@ class Invoice extends Model
     public function belekas()
     {
         return $this->belongsTo(Client::class, 'client_id', 'id');
+    }
+
+    public function getPivot()
+    {
+        return $this->hasMany(ProductInvoice::class, 'invoice_id', 'id');
     }
 }
