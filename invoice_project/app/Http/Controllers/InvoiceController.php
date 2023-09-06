@@ -112,7 +112,7 @@ class InvoiceController extends Controller
         return view('invoices.edit', [
             'invoice' => $invoice,
             'clients' => Client::all(),
-            'invoiceLines' => $products,
+            'invoiceLines' => $products->sortBy('in_row'),
             'products' => Product::all(),
         ]);
     }
@@ -151,6 +151,7 @@ class InvoiceController extends Controller
                 'product_id' => $item,
                 'invoice_id' => $invoice->id,
                 'quantity' => $quantity,
+                'in_row' => $request->in_row[$key],
             ]);
         });
 
