@@ -5,6 +5,8 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 addEventListener("load", (_) => {
     if (document.querySelector(".--add-product")) {
+        addProductEvent();
+        calculateTotal();
         document
             .querySelector(".--add-product")
             .addEventListener("click", (e) => {
@@ -15,6 +17,7 @@ addEventListener("load", (_) => {
                             .querySelector(".--products")
                             .insertAdjacentHTML("beforeend", res.data.html);
                         addProductEvent();
+                        addInRow();
                     })
                     .catch((err) => console.log(err));
             });
@@ -45,7 +48,7 @@ const addProductEvent = (_) => {
                 e.target.closest(".--line").querySelector(".--total").value = (
                     price * quantity
                 ).toFixed(2);
-                // calculateTotal();
+                calculateTotal();
             });
         });
 
@@ -80,6 +83,7 @@ const addProductEvent = (_) => {
             select.addEventListener("click", (e) => {
                 e.target.closest(".--line").remove();
                 calculateTotal();
+                addInRow();
             });
         });
 };
@@ -90,4 +94,13 @@ const calculateTotal = (_) => {
         total += parseFloat(input.value);
     });
     document.querySelector(".--amount").value = total.toFixed(2);
+};
+
+const addInRow = (_) => {
+    let i = 1;
+    document.querySelectorAll(".--products .--line").forEach((line) => {
+        line.querySelector("h5.--in-row").innerHTML = i;
+        line.querySelector("input.--in-row").value = i;
+        i++;
+    });
 };
