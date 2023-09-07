@@ -13,10 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all(); //pasiemam visus invoicus is DB
-        return view('products.index', [
-            'products' => $products,
-        ]);
+        $products = Product::all();
+        return view('products.index', ['products' => $products]);
     }
 
     /**
@@ -24,9 +22,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create', [
-            'products' => Product::all(),
-        ]);
+        return view('products.create');
     }
 
     /**
@@ -34,6 +30,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = (new ProductValidator())->validate($request);
 
         if ($validator->fails()) {
@@ -70,6 +67,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+
+        $validator = (new ProductValidator())->validate($request);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('products-edit', ['product' => $product])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $product->update($request->all());
         return redirect()
             ->route('products-index')

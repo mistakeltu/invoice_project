@@ -15,25 +15,20 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="mb-3">
-                                        <label class="form-label">Product name</label>
-                                        <input type="text" class="form-control" placeholder="product name"
-                                            name="name">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control" placeholder="product name" name="name" value="{{old('name')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="mb-3">
-                                        <label class="form-label">Product price</label>
-                                        <input type="text" class="form-control" placeholder="product price" name="price">
+                                        <label class="form-label">Price</label>
+                                        <input type="text" class="form-control" placeholder="price" name="price" value="{{old('price')}}">
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Product description</label>
-                                    <textarea class="form-control" rows="3" placeholder="description" name="description"></textarea>
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" rows="20" name="description">{{old('description')}}</textarea>
                                   </div>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-outline-primary">Create Product</button>

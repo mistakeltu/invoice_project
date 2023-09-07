@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Models\ProductInvoice;
 use Illuminate\Http\Request;
+use App\Http\Validators\InvoiceValidator;
 
 class InvoiceController extends Controller
 {
@@ -39,6 +40,7 @@ class InvoiceController extends Controller
             'invoices.create',
             [
                 'clients' => Client::all(),
+                'products' => Product::all(),
             ]
         );
     }
@@ -52,6 +54,15 @@ class InvoiceController extends Controller
         // dump($request->all());
 
         // die;
+
+        $validator = (new InvoiceValidator())->validate($request);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('invoices-create')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
 
         $invoice = Invoice::create([
