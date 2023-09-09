@@ -14,12 +14,23 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <div class="form-div">Client name: {{$client->client_name}}</div>
-                                    <div class="form-div">Address: {{$client->client_address}},
+                                    <div class="form-div"><b>Client name:</b> {{$client->client_name}}</div>
+                                    <div class="form-div"><b>Address:</b> {{$client->client_address}},
                                         {{$client->client_address2}}</div>
-                                    <div class="form-div">VAT: {{$client->client_vat ?? 'no VAT'}}</div>
-                                    <div class="form-div">Country: {{$countries[$client->client_country]}}</div>
-                                    <div class="form-div">Invoices: {{$client->invoices()->count()}}</div>
+                                    <div class="form-div"><b>VAT:</b> {{$client->client_vat ?? 'no VAT'}}</div>
+                                    <div class="form-div"><b>Country:</b> {{$countries[$client->client_country]}}</div>
+                                    <div class="form-div mt-3"><b>Invoices:</b>
+                                        <ul class="small-list">
+                                            @forelse ($client->invoices as $invoice)
+                                            <li>
+                                                <a
+                                                    href="{{route('invoices-edit', $invoice)}}">{{$invoice->invoice_number}} {{$client->client_name}}</a>
+                                            </li>
+                                            @empty
+                                            <li>No invoices</li>
+                                            @endforelse
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
