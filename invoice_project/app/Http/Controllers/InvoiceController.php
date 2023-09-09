@@ -50,11 +50,6 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-
-        // dump($request->all());
-
-        // die;
-
         $validator = (new InvoiceValidator())->validate($request);
 
         if ($validator->fails()) {
@@ -64,15 +59,11 @@ class InvoiceController extends Controller
                 ->withInput();
         }
 
-
         $invoice = Invoice::create([
             'invoice_number' => $request->number,
             'invoice_date' => $request->date,
             'client_id' => $request->client_id,
         ]);
-
-
-
 
         foreach ($request->product_id as $key => $value) {
             $quantity = $request->quantity[$key];
@@ -133,8 +124,17 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
+
+        $validator = (new InvoiceValidator())->validate($request);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('invoices-edit', ['invoice' => $invoice])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $invoice->update([
-            'invoice_number' => $request->number,
             'invoice_date' => $request->date,
             'client_id' => $request->client_id,
         ]);
