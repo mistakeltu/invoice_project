@@ -96,6 +96,8 @@ class InvoiceController extends Controller
     public function edit(Invoice $invoice)
     {
 
+
+
         $products = collect(); // create a new collection
 
         $invoice->getPivot->each(function ($item, $key) use (&$products) {
