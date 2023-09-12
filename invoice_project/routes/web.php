@@ -36,7 +36,7 @@ Route::prefix('invoices')->name('invoices-')->group(function () {
 });
 
 Route::prefix('clients')->name('clients-')->group(function () {
-    Route::get('/', [C::class, 'index'])->name('index'); // all clients
+    Route::get('/', [C::class, 'index'])->name('index')->middleware('role:admin|manager|user'); // all clients
     Route::get('/show/{client}', [C::class, 'show'])->name('show'); // show one client
 
     Route::get('/create', [C::class, 'create'])->name('create'); // show create form
@@ -61,6 +61,6 @@ Route::prefix('products')->name('products-')->group(function () {
     Route::delete('/{product}', [P::class, 'destroy'])->name('destroy'); // delete existing product
 });
 
-Auth::routes(); //logino routai
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); //home routas
