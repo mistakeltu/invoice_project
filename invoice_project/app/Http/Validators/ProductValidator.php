@@ -24,6 +24,8 @@ class ProductValidator
                 'name.max' => 'Product name must be less than 255 characters.',
                 'price.required' => 'Product price is required.',
                 'price.numeric' => 'Product price must be a number.',
+                'discount.required' => 'Product discount is required.',
+                'discount.numeric' => 'Product discount must be a number.',
                 'description.required' => 'Product description is required.',
                 'description.min' => 'Product description must be at least 30 characters.',
                 'description.max' => 'Product description must be less than 10000 characters.',
