@@ -15,6 +15,7 @@ class ProductValidator
             [
                 'name' => 'required|min:3|max:255',
                 'price' => 'required|numeric',
+                'discount' => 'required|numeric',
                 'description' => 'required|min:3|max:10000',
             ],
             [
