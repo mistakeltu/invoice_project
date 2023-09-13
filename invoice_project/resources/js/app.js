@@ -104,3 +104,28 @@ const addInRow = (_) => {
         i++;
     });
 };
+
+// MIN MAX SLIDERS
+addEventListener("load", (_) => {
+    if (document.querySelector("input[type=range]")) {
+        const min = document.querySelector("input[name=min]");
+        const max = document.querySelector("input[name=max]");
+        const minVal = document.querySelector("#min");
+        const maxVal = document.querySelector("#max");
+
+        min.addEventListener("input", (e) => {
+            minVal.innerHTML = e.target.value;
+            if (parseInt(max.value) < parseInt(min.value)) {
+                max.value = min.value;
+                maxVal.innerHTML = min.value;
+            }
+        });
+        max.addEventListener("input", (e) => {
+            maxVal.innerHTML = e.target.value;
+            if (parseInt(max.value) < parseInt(min.value)) {
+                min.value = max.value;
+                minVal.innerHTML = max.value;
+            }
+        });
+    }
+});
