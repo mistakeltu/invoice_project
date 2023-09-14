@@ -274,10 +274,34 @@ class Invoice extends Model
         'ZM' => 'Zambia',
         'ZW' => 'Zimbabwe',
         'AX' => 'Åland Islands',
+        'CW' => 'Curaçao',
     ];
 
     protected $fillable = [
         'invoice_number', 'invoice_date', 'client_id'
+    ];
+
+    protected $casts = [
+        'archive' => 'array',
+    ];
+
+    const RESULTS_PER_PAGE = [
+        15 => 15,
+        30 => 30,
+        50 => 50,
+        'all' => 'All',
+    ];
+
+    const SORTS = [
+        '' => 'None',
+        'old' => 'Oldest first',
+        'new' => 'Newest first',
+    ];
+
+    const ARCHIVES = [
+        'all' => 'All',
+        'archived' => 'Archived',
+        'not_archived' => 'Not archived',
     ];
 
     public function client()
