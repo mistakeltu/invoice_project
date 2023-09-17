@@ -66,6 +66,9 @@ Route::prefix('products')->name('products-')->group(function () {
     Route::delete('/{product}', [P::class, 'destroy'])->name('destroy')->middleware('role:admin|manager'); // delete existing product
 });
 
+// Client search with axios
+Route::get('/clients/search', [C::class, 'search'])->name('clients-search')->middleware('role:admin|manager|user');
+
 
 
 Auth::routes(['register' => false]);
