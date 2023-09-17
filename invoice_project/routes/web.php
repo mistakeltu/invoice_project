@@ -22,7 +22,7 @@ use App\Http\Controllers\HomeController as H;
 // });
 
 Route::get('/', [H::class, 'index'])->name('home');
-// Route::get('/home', [H::class, 'index'])->name('home');
+Route::get('/home', [H::class, 'index'])->name('home');
 
 
 Route::prefix('invoices')->name('invoices-')->group(function () {
