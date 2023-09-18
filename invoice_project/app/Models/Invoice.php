@@ -278,7 +278,7 @@ class Invoice extends Model
     ];
 
     protected $fillable = [
-        'invoice_number', 'invoice_date', 'client_id'
+        'invoice_number', 'invoice_date', 'client_id', 'archive'
     ];
 
     protected $casts = [
